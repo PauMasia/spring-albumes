@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/albums")
 public class AlbumController {
 
     @Autowired
@@ -25,12 +24,12 @@ public class AlbumController {
     public List<Album> obtenirAlbums(Model model) {
         return (List<Album>) albumService.getAllAlbum();
     }
-    @PostMapping
+    @PostMapping("/album")
     public Album createAlbum(@RequestBody Album generation) {
         return albumRepository.save(generation);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/album/{id}")
     public ResponseEntity<Album> updateAlbum(@PathVariable Long id, @RequestBody Album updateAlbum) {
         Optional<Album> a = albumRepository.findById(id);
         if (a.isPresent()) {
@@ -42,7 +41,7 @@ public class AlbumController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/album/{id}")
     public void deleteAlbum(@PathVariable Long id) {
         albumRepository.deleteById(id);
     }
