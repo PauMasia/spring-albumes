@@ -1,6 +1,7 @@
 package com.pau.personal.model.entitats;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,31 +16,25 @@ public class Album {
     String name;
     int anyo;
     int sales;
-    String actual_image;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "artista_Name")
-    public Artista artista_name;
+    @ManyToOne
+    @JoinColumn(name = "artista_id")
+    @JsonIgnoreProperties("albums")
+    public Artista artista_id;
     @ManyToMany
     @JoinTable(name = "ALBUM_GENERO",
             joinColumns = @JoinColumn(name = "album_id"),
             inverseJoinColumns = @JoinColumn(name = "genero_id")
     )
+    @JsonIgnoreProperties({"albums", "id"})
     public List<Genero> genero;
-
-
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-    public Album() {
-    }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -49,7 +44,13 @@ public class Album {
         this.name = name;
     }
 
+    public int getAnyo() {
+        return anyo;
+    }
 
+    public void setAnyo(int anyo) {
+        this.anyo = anyo;
+    }
 
     public int getSales() {
         return sales;
@@ -59,6 +60,19 @@ public class Album {
         this.sales = sales;
     }
 
+    public Artista getArtista_id() {
+        return artista_id;
+    }
 
+    public void setArtista_id(Artista artista_id) {
+        this.artista_id = artista_id;
+    }
 
+    public List<Genero> getGenero() {
+        return genero;
+    }
+
+    public void setGenero(List<Genero> genero) {
+        this.genero = genero;
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "Artista")
+@Table(name = "ARTISTA")
 public class Artista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -18,23 +18,15 @@ public class Artista {
     String country;
 //    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "artistaName")
-    String artistaName;
+    String artista_Name;
 
-    String actualImage;
+    String actual_Image;
 
-    @OneToMany(mappedBy = "artName")
+    @OneToMany(mappedBy = "artista_id")
     @JsonIgnoreProperties("artista")
     List<Album> albums;
 
     public Artista() {
-    }
-
-    public Artista(String name, int birth, String country, String artistaName, String actualImage) {
-        this.name = name;
-        this.birth = birth;
-        this.country = country;
-        this.artistaName = artistaName;
-        this.actualImage = actualImage;
     }
 
     public long getId() {
@@ -67,22 +59,6 @@ public class Artista {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getArtistaName() {
-        return artistaName;
-    }
-
-    public void setArtistaName(String artistaName) {
-        this.artistaName = artistaName;
-    }
-
-    public String getActualImage() {
-        return actualImage;
-    }
-
-    public void setActualImage(String actualImage) {
-        this.actualImage = actualImage;
     }
 
     public List<Album> getAlbums() {
